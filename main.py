@@ -27,7 +27,7 @@ def run_ingestion(job):
             file = f.read().encode("utf-8")
 
     # upload ticket data to s3
-    ext = ".csv" if job==ticket else ".txt"
+    ext = ".csv" if job==ticket else ".log"
     key = job + f"/raw/{date}{ext}"
     h.upload_to_s3(bucket, key, file)
 
