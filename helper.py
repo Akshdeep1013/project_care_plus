@@ -36,7 +36,7 @@ def upload_to_s3(bucket=None, key=None, body=None):
         Key    = key,
         Body   = body
     )
-    print("Uploaded on S3!")
+    print(f"Uploaded on S3 key:{key}")
     return
 
 def get_next_date(curr_date):
