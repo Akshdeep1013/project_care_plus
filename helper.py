@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 import sqlalchemy
 import io
 import pandas as pd
+import helper
 
 s3_client = boto3.client(
         service_name          = "s3",
@@ -14,7 +15,7 @@ s3_client = boto3.client(
         region_name           = os.getenv("REGION")
     )
 
-def fetch_last_date(bucket=None, key=None):
+def fetch_from_s3(bucket=None, key=None):
     try :
         stream_data = s3_client.get_object(
             Bucket = bucket,
@@ -22,9 +23,9 @@ def fetch_last_date(bucket=None, key=None):
         )
 
         #extract body from stream data(bytes) back to string
-        last_date = stream_data['Body'].read().decode("utf-8")
-        print(f"last date: {last_date}")
-        return last_date
+        data = stream_data['Body'].read().decode("utf-8")
+        # print(f"last date: {last_date}")
+        return data
 
     except Exception as e:
         print(f"Tracker file does not exist on s3: {e}")

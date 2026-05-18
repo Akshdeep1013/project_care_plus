@@ -12,7 +12,7 @@ log_dir  = ("/home/deep/code/CB/project_care_plus/project-care-plus/"
 def run_ingestion(job):
     # fetch last date from tracker
     tracker_key = job+"/raw/tracker"
-    last_updated_date=h.fetch_last_date(bucket, tracker_key)
+    last_updated_date=h.fetch_from_s3(bucket, tracker_key)
 
     # get next day
     date = h.get_next_date(last_updated_date)
